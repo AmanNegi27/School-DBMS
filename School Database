@@ -1,0 +1,430 @@
+Create database School;
+
+use  School;
+
+Create table Student
+(stu_id int Primary key,
+stu_name varchar(100) NOT NULL,
+DOB Date NOT NULL,
+Phone_no int NOT NULL,
+Marks int);
+
+Create table Teacher
+(T_id int Primary key,
+T_name varchar(100) NOT NULL,
+Phone_no int NOT NULL,
+Domain varchar(50) NOT NULL
+);
+
+Create table subject
+(sub_id int primary key,
+sub_name varchar(50) NOT NULL,
+credits int NOT NULL,
+duration int NOT NULL
+);
+
+create table class 
+(class_id int primary key,
+standard int NOT NULL,
+section char(1) NOT NULL,
+capacity int NOT NULL
+);
+
+create table transport 
+(Bus_no int primary key,
+Contact_no int NOT NULL,
+capacity int NOT NULL,
+arr_time time NOT NULL
+);
+
+create table Exam
+(Ex_id int primary key,
+Date date NOT NULL,
+Name varchar(50) NOT NULL
+);
+
+
+create table  Assign
+(stu_id int,
+T_id int,
+class_id int,
+primary key(stu_id, T_id, class_id),
+foreign key(stu_id) references Student(stu_id),
+foreign key(T_id) references Teacher(T_id),
+foreign key(class_id) references class(class_id));
+
+create table teaches 
+(stu_id int,
+T_id int,
+sub_id int,
+primary key(stu_id, T_id, sub_id),
+foreign key(stu_id) references Student(stu_id),
+foreign key(T_id) references Teacher(T_id),
+foreign key(sub_id) references subject(sub_id));
+
+create table uses
+(stu_id int,
+Bus_no int,
+primary key(stu_id, Bus_no),imageimage
+foreign key(stu_id) references Student(stu_id),
+foreign key(Bus_no) references transport(Bus_no));
+
+create table assesment 
+(sub_id int,
+Ex_id int,
+primary key(sub_id, Ex_id),
+foreign key(sub_id) references subject(sub_id),
+foreign key(Ex_id) references Exam(Ex_id));
+
+use school;
+select * from student;
+
+insert into student(stu_id, stu_name, DOB, Phone_no, Marks) Values(01, "Aman", "2024-04-27", 6398, 90);
+insert into student(stu_id, stu_name, DOB, Phone_no, Marks) Values(02, "Aridaman", "2004-10-2", 9543, 94);
+insert into student(stu_id, stu_name, DOB, Phone_no, Marks) Values(03, "Abhinav", "2003-06-26", 6541, 85);
+insert into student(stu_id, stu_name, DOB, Phone_no, Marks) Values(04, "Homi", "2005-07-15", 7895, 93);
+insert into student(stu_id, stu_name, DOB, Phone_no, Marks) Values(05, "Aditya", "2005-01-10", 2364, 83);
+insert into student(stu_id, stu_name, DOB, Phone_no, Marks) Values(06, "Priyanshu", "2003-11-27", 9632, 89);
+insert into student(stu_id, stu_name, DOB, Phone_no, Marks) Values(07, "Abhishek", "2003-03-30", 8569, 96);
+insert into student(stu_id, stu_name, DOB, Phone_no, Marks) Values(08, "Aryan", "2004-08-07", 8745 , 97);
+insert into student(stu_id, stu_name, DOB, Phone_no, Marks) Values(09, "Soham", "2003-03-25", 9201, 91);
+insert into student(stu_id, stu_name, DOB, Phone_no, Marks) Values(10, "Raghav", "2003-12-31", 9346, 80);
+
+insert into Teacher(T_id, T_name, Phone_no, Domain) Values(11, "Hanumat", 6932, "Automata");
+insert into Teacher(T_id, T_name, Phone_no, Domain) Values(12, "Saroj", 8746, "Database");
+insert into Teacher(T_id, T_name, Phone_no, Domain) Values(13, "Virender", 9874, "Data Structure");
+insert into Teacher(T_id, T_name, Phone_no, Domain) Values(14, "Shaurya", 6578, "Web Tech");
+insert into Teacher(T_id, T_name, Phone_no, Domain) Values(15, "Kanchan", 8523, "EVS");
+insert into Teacher(T_id, T_name, Phone_no, Domain) Values(16, "Saurabh", 9307, "Modelling");
+insert into Teacher(T_id, T_name, Phone_no, Domain) Values(17, "Titus", 7530, "Design Thinking");
+insert into Teacher(T_id, T_name, Phone_no, Domain) Values(18, "Tanu", 8463, "Software Engineering");
+insert into Teacher(T_id, T_name, Phone_no, Domain) Values(19, "Girish", 7413, "Maths");
+insert into Teacher(T_id, T_name, Phone_no, Domain) Values(20, "Sahinur", 6930, "Data Warehouse");
+
+insert into subject(sub_id, sub_name, credits, duration) 
+values
+(31, "Automata", 3, 6),
+(32, "Database", 3, 7),
+(33, "Data Structure", 3, 8),
+(34, "Data  Warehouse", 3, 8),
+(35, "Design Thinking", 1, 4),
+(36, "EVS", 3, 3),
+(37, "Modelling", 4, 6),
+(38, "Maths", 4, 6),
+(39, "Software Engineering", 3, 6),
+(40, "Web Tech", 3, 5);
+
+insert into class(class_id, standard, section, capacity)
+values
+(21, 10, "A", 45),
+(22, 10, "B", 45),
+(23, 10, "C", 50),
+(24, 11, "A", 50),
+(25, 11, "B", 55),
+(26, 11, "C", 60),
+(27, 12, "A", 60),
+(28, 12, "B", 60),
+(29, 12, "C", 55),
+(30, 12, "D", 50);
+
+insert into transport(Bus_no, Contact_no, capacity, arr_time)
+values
+(41, 4520, 60, "7:23:00"),
+(42, 4632, 55, "7:25:00"),
+(43, 3210, 40, "7:30:00"),
+(44, 3698, 50, "7:35:00"),
+(45, 4589, 57, "7:40:00"),
+(46, 8539, 62, "7:55:00"),
+(47, 6479, 55, "7:45:00"),
+(48, 4380, 50, "7:46:00"),
+(49, 9618, 53, "7:49:00"),
+(50, 3690, 60, "8:00:00");
+
+insert into exam(Ex_id, Date, Name) 
+values
+(61, "2024-05-10", "Automata"),
+(62, "2024-05-12", "Web Tech"),
+(63, "2024-05-15", "Data Structure"),
+(64, "2024-05-17", "Database"),
+(65, "2024-05-20", "Data Warehouse"),
+(66, "2024-05-22", "Design Thinking"),
+(67, "2024-05-24", "Software Engineering"),
+(68, "2024-05-28", "Maths"),
+(69, "2024-05-30", "EVS"),
+(70, "2024-05-31", "Modelling");
+
+use school;
+select * from Assign;
+
+insert into Assign(stu_id, T_id, class_id)
+values
+(01, 11, 21),
+(02, 12, 22),
+(03, 13, 23),
+(04, 14, 24),
+(05, 15, 25),
+(06, 16, 26),
+(07, 17, 27),
+(08, 18, 28),
+(09, 19, 29),
+(10, 20, 30);
+
+insert into teaches(stu_id, T_id, sub_id)
+values
+(01, 11, 31),
+(02, 12, 32),
+(03, 13, 33),
+(04, 14, 34),
+(05, 15, 35),
+(06, 16, 36),
+(07, 17, 37),
+(08, 18, 38),
+(09, 19, 39),
+(10, 20, 40);
+
+insert into uses(stu_id, Bus_no)
+values
+(01, 41),
+(02, 42),
+(03, 43),
+(04, 44),
+(05, 45),
+(06, 46),
+(07, 47),
+(08, 48),
+(09, 49),
+(10, 50);
+
+insert into assesment(sub_id, Ex_id)
+values
+(31,61),
+(32,62),
+(33,63),
+(34,64),
+(35,65),
+(36,66),
+(37,67),
+(38,68),
+(39,69),
+(40,70);
+
+create  view StudentName AS( select stu_id, stu_name from student where stu_name="Aman");
+
+create view TeachersName AS( select T_id, T_name from Teacher );
+
+create view classroom AS( select class_id, standard, section from class where capacity=60);
+
+
+use school;
+select * from student where stu_name="Homi";
+update student set DOB="2005-06-11" where stu_name="Homi";
+
+use school;
+select * from teacher where Domain="Database";
+
+Use school;
+ALTER table student
+ADD attendance int NOT NULL ;
+
+USE school;
+ALTER table teacher
+Modify Domain varchar(50) NOT NULL UNIQUE;
+
+USE school;
+ALTER table subject
+alter credits set default 1;
+
+
+USE school;
+Alter table subject
+add constraint check_duration CHECK(duration>=2);
+
+USE school;
+alter table transport
+add constraint Bus_no Unique  (Bus_no);
+
+use school;
+select *from student
+where marks=90 or marks=93;
+
+use school;
+select t_name from teacher
+where Domain="Automata" AND Domain="Database";
+
+use school;
+select t_name from teacher
+where NOT Domain="Data Structure" AND NOT Domain="EVS";
+
+
+use school;
+select class_id from class
+where standard=12 AND(capacity=50 OR capacity=60);
+
+Use school;
+select *from transport
+where arr_time>="7:30:00" and  arr_time<="7:55:00";
+
+use school;
+select *from student where marks=90
+UNION
+select *from student where marks=83;
+
+use school;
+select *from class where capacity=60
+INTERSECT classroom
+select *from class where standard=12;
+
+use school;
+select T_name, Domain from teacher
+where Domain IN (Select distinct Domain from teacher);
+
+use school;
+select Bus_no, Contact_no from transport
+where arr_time BETWEEN "7:23:00" AND "7:50:00";
+
+use school;
+select stu_name from student 
+where marks>ALL(Select marks from student where stu_name="Aman");
+
+use school;
+select stu_name,marks from student 
+where marks<ANY(Select marks from student where stu_name="Aditya");
+
+use school;
+select *from class
+where capacity<ANY(Select capacity from class where capacity=55);
+
+use school;
+select * from student;
+
+update student set marks=94 where stu_name="Aman";
+
+select  count(stu_id), marks from student
+group by marks;
+
+select sum(marks),stu_name  from student
+group by stu_name 
+having sum(marks)>90;
+
+use school;
+select *from class;
+
+select count(class_id), count(standard), capacity from class
+group by capacity
+order by count(class_id) desc;
+
+use school;
+select *from teaches;
+select* from student;
+
+select *
+from student
+where exists(select stu_id from teaches where student.stu_id=teaches.stu_id and stu_id=4);
+
+use school;
+select * from 
+student cross join assign;
+
+use school;
+select * from teacher 
+Natural join teaches;
+
+select student.stu_name, student.stu_id as student_id
+from student
+join  uses on student.stu_id=uses.stu_id;
+
+select student.stu_id, student.stu_name, subject.sub_name, teacher.T_name
+from student, Teaches, subject, teacher
+where student.stu_id=teaches.stu_id and teaches.sub_id=subject.sub_id and teaches.t_id=teacher.t_id;
+
+select student.stu_id, student.stu_name, subject.sub_name, teacher.t_name
+from student 
+left join teaches on student.stu_id=teaches.stu_id
+left join subject on teaches.sub_id= subject.sub_id
+left join teacher on teaches.t_id = teacher.t_id;
+
+use school;
+select class.class_id, class.standard, assign.stu_id
+from class
+right outer join  assign on class.class_id=assign.class_id;
+
+select subject.sub_id, subject.sub_name , exam.Ex_id
+from subject 
+full join exam on subject.sub_id=exam.sub_id;
+
+SELECT s.stu_id, s.stu_name, sb.sub_name, t.T_name
+ FROM Student s
+ LEFT JOIN Teaches tch ON s.stu_id = tch.stu_id
+ LEFT JOIN Subject sb ON tch.sub_id = sb.sub_id
+ LEFT JOIN Teacher t ON tch.T_id = t.T_id
+ UNION
+ SELECT s.stu_id, s.stu_name, sb.sub_name, t.T_name
+ FROM Teaches tch
+ RIGHT JOIN Student s ON s.stu_id = tch.stu_id
+ RIGHT JOIN Subject sb ON tch.sub_id = sb.sub_id
+ RIGHT JOIN Teacher t ON tch.T_id = t.T_id;
+
+
+ use school;
+ select *from Exam
+ ;
+ 
+use school;
+DELIMITER //
+CREATE PROCEDURE GetStudentDetailsbyID(in student_id int)
+BEGIN
+    SELECT * FROM Student where stu_id= student_id;
+END //
+DELIMITER ;
+
+use school;
+CALL GetStudentDetailsbyID(2);
+
+use school;
+update student
+set DOB="2005-08-05" where stu_name="Aridaman";
+
+use school;
+delimiter //
+Create Procedure GetTeacherDetailsByDomain(in Domain_name varchar(50))
+Begin 
+select *from teacher where domain=domain_name;
+end //
+delimiter ;
+
+Call getTeacherDetailsByDomain("Database");
+
+use school;
+DELIMITER //
+
+CREATE PROCEDURE GetClassCountByStandard(IN class_standard INT)
+BEGIN
+    SELECT COUNT(*) AS class_count FROM Class WHERE standard = class_standard;
+END //
+
+DELIMITER ;
+
+Call GetClassCountByStandard(10);
+
+use school;
+DELIMITER //
+
+CREATE PROCEDURE GetSubjectDetails(IN subject_id INT, IN subject_credits INT)
+BEGIN
+    SELECT * FROM subject WHERE sub_id = subject_id AND credits = subject_credits;
+END //
+
+DELIMITER ;
+
+use school;
+Call GetSubjectDetails(32, 3);
+
+Use school;
+Delimiter //
+Create Procedure GetBusDetails(In BusNO int)
+Begin
+Select *from transport where Bus_no= BusNo;
+End //
+delimiter ;
+
+Call GetBusDetails(48);
